@@ -27,7 +27,7 @@ class _TextSliderWidgetState extends State<TextSliderWidget> {
     return Column(
       children: [
         SizedBox(
-          height: 250,
+          height: 200,
           child: PageView.builder(
             controller: pageController,
             itemBuilder: ((context, index) {
