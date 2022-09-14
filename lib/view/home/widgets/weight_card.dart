@@ -1,12 +1,14 @@
 import 'package:bmi_calculator/helpers/app_styles.dart';
-import 'package:bmi_calculator/view/home/widgets/helperWidgets/carousel_slider_widget.dart';
+
 import 'package:flutter/material.dart';
 
+import 'helperWidgets/triangleClipper.dart';
+
 class WeightCard extends StatelessWidget {
-  WeightCard({super.key, required this.name, required this.sliderTextWidget});
+  WeightCard({super.key, required this.name});
 
   final String name;
-  final Widget sliderTextWidget;
+
   var itemList = List<String>.generate(200, (index) => '$index');
 
   @override
@@ -26,11 +28,50 @@ class WeightCard extends StatelessWidget {
             style: TextStyle(fontSize: 20, color: Styles.textColor),
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
-          sliderTextWidget,
+          Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    border: Border.all(style: BorderStyle.none),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                width: MediaQuery.of(context).size.width * 0.25,
+                child: SingleChildScrollView(
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        width: MediaQuery.of(context).size.width * 0.20,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: itemList.length,
+                            itemBuilder: ((context, index) => buildCard(index))),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              ClipPath(
+                clipper: TriangleClipper(),
+                child: Container(
+                  color: Colors.black,
+                  height: MediaQuery.of(context).size.height * 0.01,
+                  width: MediaQuery.of(context).size.width * 0.04,
+                ),
+              ),
+            ],
+          )
         ]),
       ),
     );
   }
+
+  Widget buildCard(int index) => SizedBox(
+        width: 30,
+        height: 30,
+        child: Center(child: Text('${index + 1}')),
+      );
 }

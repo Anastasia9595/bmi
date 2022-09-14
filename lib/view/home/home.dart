@@ -1,4 +1,8 @@
+import 'package:bmi_calculator/view/home/widgets/ageCard.dart';
 import 'package:bmi_calculator/view/home/widgets/height_card.dart';
+import 'package:bmi_calculator/view/home/widgets/helperWidgets/bottom_button.dart';
+import 'package:bmi_calculator/view/home/widgets/helperWidgets/round_icon_button.dart';
+
 import 'package:bmi_calculator/view/home/widgets/helperWidgets/tick_mark_shape.dart';
 
 import 'package:bmi_calculator/view/home/widgets/userCard.dart';
@@ -9,15 +13,16 @@ import 'package:syncfusion_flutter_core/theme.dart';
 
 import '../../helpers/app_styles.dart';
 
-class HomePage2 extends StatefulWidget {
-  const HomePage2({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomePage2> createState() => _HomePage2State();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePage2State extends State<HomePage2> {
+class _HomePageState extends State<HomePage> {
   double height = 160;
+  int age = 30;
 
   @override
   Widget build(BuildContext context) {
@@ -106,12 +111,38 @@ class _HomePage2State extends State<HomePage2> {
               ),
               Row(
                 children: [
-                  WeightCard(
-                    name: 'Weight',
-                    sliderTextWidget: Text('Slider'),
-                  )
+                  Expanded(
+                    child: WeightCard(
+                      name: 'Weight',
+                    ),
+                  ),
+                  Expanded(
+                    child: AgeCard(
+                      name: 'Age',
+                      age: age.toStringAsFixed(0),
+                      buttonWidgetAdd: RoundIconButton(
+                          icon: Icons.add,
+                          onPressed: () {
+                            if (age <= 99) {
+                              setState(() {
+                                age++;
+                              });
+                            }
+                          }),
+                      buttonWidgetRemove: RoundIconButton(
+                          icon: Icons.remove,
+                          onPressed: () {
+                            if (age > 1) {
+                              setState(() {
+                                age--;
+                              });
+                            }
+                          }),
+                    ),
+                  ),
                 ],
-              )
+              ),
+              BottomButton(onTap: () {}, buttonTitle: 'Calculate')
             ],
           ),
         ],
