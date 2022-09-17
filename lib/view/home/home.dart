@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:bmi_calculator/view/bmi_details/bmi_details.dart';
 import 'package:bmi_calculator/view/home/widgets/ageCard.dart';
 import 'package:bmi_calculator/view/home/widgets/height_card.dart';
 import 'package:bmi_calculator/view/home/widgets/helperWidgets/bottom_button.dart';
@@ -22,7 +25,35 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double height = 160;
+  int _weight = 40;
+  int selectedWeightIndex = 0;
   int age = 30;
+  double bmi = 0;
+  void _calculateBMIShowResult(BuildContext context) {
+    calculateBMI();
+    showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(40),
+      ),
+      context: context,
+      builder: (ctx) {
+        return BMIDetail(
+          bmi: bmi.toStringAsFixed(1),
+        );
+      },
+    );
+  }
+
+  void getSelectedWeightIndex(int index, int weight) {
+    setState(() {
+      selectedWeightIndex = index;
+      _weight = weight;
+    });
+  }
+
+  void calculateBMI() {
+    bmi = (_weight / pow(height / 100, 2));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,9 +142,34 @@ class _HomePageState extends State<HomePage> {
               ),
               Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: WeightCard(
                       name: 'Weight',
+                      weight: _weight,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 100,
+                        itemBuilder: ((context, index) {
+                          final weight = 40 + index;
+                          return Center(
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _weight = weight;
+                                  selectedWeightIndex = index;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  weight.toString(),
+                                  style: selectedWeightIndex == index ? Styles.kTexStyleBold : Styles.kTexStyle,
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -142,7 +198,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              BottomButton(onTap: () {}, buttonTitle: 'Calculate')
+              BottomButton(
+                  onTap: () {
+                    _calculateBMIShowResult(context);
+                  },
+                  buttonTitle: 'Calculate BMI')
             ],
           ),
         ],
