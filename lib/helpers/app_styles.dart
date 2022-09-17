@@ -9,6 +9,8 @@ class Styles {
   static TextStyle textStyleCard = const TextStyle(fontSize: 20, fontWeight: FontWeight.w500);
   static TextStyle headLineStyle = const TextStyle(fontSize: 40, fontWeight: FontWeight.w500);
   static TextStyle headLineStyle2 = const TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
+  static TextStyle kTexStyleBold = const TextStyle(color: Color(0xFF0A1028), fontWeight: FontWeight.w700, fontSize: 24);
+  static TextStyle kTexStyle = const TextStyle(color: Color(0xFF0A1028), fontWeight: FontWeight.w400, fontSize: 16);
   static double kBottomContainerHeight = 80.0;
   static Color kBottomContainerColour = const Color(0xFFEB1555);
   static TextStyle kLargeButtonTextStyle = const TextStyle(

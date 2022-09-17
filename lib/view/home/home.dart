@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: WeightCard(
                       name: 'Weight',
                     ),
