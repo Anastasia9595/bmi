@@ -1,79 +1,96 @@
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:bmi_calculator/model/person.dart';
 import 'package:bmi_calculator/utils/constants.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 part 'bmi_state.dart';
 
 class BmiCubit extends Cubit<BmiState> {
   BmiCubit()
       : super(const BmiState(
-          age: 21,
-          weight: 40,
           selectedWeightIndex: 0,
-          height: 160,
-          bmiResult: 0,
-          gender: Gender.none,
           bmiResultText: '',
           description: '',
+          person: Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: ''),
         ));
 
-  void incrementAge() => emit(state.copyWith(
-      age: state.age + 1,
-      weight: state.weight,
-      selectedWeightIndex: state.selectedWeightIndex,
-      height: state.height,
-      bmiResult: state.bmiResult));
+  void incrementAge() {
+    final person = state.person;
+    final newPerson = person.copyWith(age: person.age + 1);
+    emit(state.copyWith(person: newPerson));
+  }
 
-  void decrementAge() => emit(state.copyWith(
-      age: state.age > 0 ? state.age - 1 : state.age,
-      weight: state.weight,
-      selectedWeightIndex: state.selectedWeightIndex,
-      height: state.height,
-      bmiResult: state.bmiResult));
+  void decrementAge() {
+    final person = state.person;
+    final newPerson = person.copyWith(age: person.age - 1);
+    emit(state.copyWith(person: newPerson));
+  }
 
-  void setSelectWeight(weight, index) => emit(state.copyWith(
-      age: state.age, weight: weight, selectedWeightIndex: index, height: state.height, bmiResult: state.bmiResult));
+  void setSelectWeight(weight, index) {
+    final person = state.person;
+    final newPerson = person.copyWith(weight: weight);
+    emit(state.copyWith(selectedWeightIndex: index, person: newPerson));
+  }
 
-  void setSelectedHeight(height) => emit(state.copyWith(
-        height: height,
-      ));
+  void setSelectedHeight(height) {
+    final person = state.person;
+    final newPerson = person.copyWith(height: height);
+    emit(state.copyWith(
+      person: newPerson,
+    ));
+  }
 
   double setBmiResult() {
-    final bmiResult = state.weight / pow(state.height / 100, 2);
+    final bmiResult = state.person.weight / pow(state.person.height / 100, 2);
+    final person = state.person;
+    final newPerson = person.copyWith(bmiResult: bmiResult);
     emit(
       state.copyWith(
-        bmiResult: bmiResult,
+        person: newPerson,
       ),
     );
     return bmiResult;
   }
 
-  void setGender(Gender gender) => emit(state.copyWith(gender: gender));
+  void setGender(Gender gender) {
+    final person = state.person;
+    final newPerson = person.copyWith(gender: gender);
+    emit(state.copyWith(person: newPerson));
+  }
 
   void setBmiCategory() {
     final result = setBmiResult();
     final String description;
-    final String bmiResult;
+    final String bmiResultText;
     if (result < 18.5) {
-      bmiResult = 'Underweight';
+      bmiResultText = 'Underweight';
       description = "You're in the underweight range. "
           "Eating at least 5 portions of a variety of fruit and vegetables every day. Basing meals on potatoes, bread, rice, pasta or other starchy carbohydrates. Having some dairy or dairy alternatives (such as soya drinks and yoghurts).";
     } else if (result > 18.5 && result < 24.9) {
-      bmiResult = 'Healthy Weight';
+      bmiResultText = 'Healthy Weight';
       description = "A BMI of 18.5 - 24.9 "
           "indicates that you are at healthy weight for your height. By maintaining a healthy weight, you lower your risk of developing serious health problems.";
     } else if (result > 25.0 && result < 29.9) {
-      bmiResult = 'Overweight';
+      bmiResultText = 'Overweight';
       description =
           "Common treatments for overweight include losing weight through healthy eating,being more physically active, and making other changes to your usual habits. Weight-management programs may help some people lose weight or keep from regaining lost weight.";
     } else {
-      bmiResult = 'Obesity';
+      bmiResultText = 'Obesity';
       description =
           "A BMI above 30 indicates that a person is morbidly obese and therefore a candidate for bariatric surgery. Bariatric surgery may also be an option for people with a BMI between 35 and 40 who suffer from life-threatening cardiopulmonary problems, diabetes, or other medical problems listed below.";
     }
 
-    emit(state.copyWith(bmiResultText: bmiResult, description: description));
+    emit(state.copyWith(bmiResultText: bmiResultText, description: description));
+  }
+
+  void clearInfo() {
+    emit(state.copyWith(
+        selectedWeightIndex: 0,
+        bmiResultText: '',
+        description: '',
+        person: const Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: '')));
   }
 }

@@ -33,7 +33,7 @@ class HeightCard extends StatelessWidget {
                     style: TextStyle(fontSize: 20, color: Styles.textColor),
                     children: [
                       TextSpan(
-                        text: '\n${state.height.toStringAsFixed(0)} cm',
+                        text: '\n${state.person.height.toStringAsFixed(0)} cm',
                         style: const TextStyle(fontSize: 16),
                       ),
                     ],
@@ -65,7 +65,7 @@ class HeightCard extends StatelessWidget {
                     showLabels: true,
                     thumbShape: TickMarkShape(),
                     minorTicksPerInterval: 5,
-                    value: state.height,
+                    value: state.person.height,
                     onChanged: (value) {
                       BlocProvider.of<BmiCubit>(context).setSelectedHeight(value);
                       // setState(() {

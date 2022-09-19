@@ -14,6 +14,7 @@ class WeightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _scrollController = ScrollController();
     return Card(
       elevation: 10,
       shape: const RoundedRectangleBorder(
@@ -33,7 +34,7 @@ class WeightCard extends StatelessWidget {
                   style: TextStyle(fontSize: 20, color: Styles.textColor),
                   children: [
                     TextSpan(
-                      text: '\n${state.weight}',
+                      text: '\n${state.person.weight}',
                       style: const TextStyle(fontSize: 16),
                     ),
                   ],
@@ -62,6 +63,7 @@ class WeightCard extends StatelessWidget {
                         child: BlocBuilder<BmiCubit, BmiState>(
                           builder: (context, state) {
                             return ListView.builder(
+                              controller: _scrollController,
                               scrollDirection: Axis.horizontal,
                               itemCount: 100,
                               itemBuilder: ((context, index) {

@@ -32,7 +32,7 @@ class BMIDetail extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  '${state.bmiResult.toStringAsFixed(2)} kg/m2',
+                  '${state.person.bmiResult.toStringAsFixed(2)} kg/m2',
                   style: Styles.kTextStyleWhiteboldsubtitle,
                 ),
                 const SizedBox(height: 12),
@@ -46,26 +46,36 @@ class BMIDetail extends StatelessWidget {
                   style: Styles.kTextStyleWhite,
                 ),
                 const SizedBox(height: 25),
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    height: 40,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF0A1028),
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    child: const Text(
-                      'Close',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        context.read<BmiCubit>().clearInfo();
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        height: 40,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0A1028),
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Close',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(width: 15),
+                    const Icon(Icons.bookmark_add, color: Colors.white, size: 26),
+                  ],
                 )
               ],
             )),

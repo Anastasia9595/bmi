@@ -33,7 +33,7 @@ class AgeCard extends StatelessWidget {
                     style: TextStyle(fontSize: 20, color: Styles.textColor),
                     children: [
                       TextSpan(
-                        text: '\n${state.age}',
+                        text: '\n${state.person.age}',
                         style: const TextStyle(fontSize: 16),
                       ),
                     ],

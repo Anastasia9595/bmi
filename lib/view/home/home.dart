@@ -48,11 +48,11 @@ class HomePage extends StatelessWidget {
                       builder: (context, state) {
                         return UserCard(
                           onTap: () => BlocProvider.of<BmiCubit>(context).setGender(Gender.female),
-                          color: state.gender != Gender.female ? Colors.white : Styles.userCardColor,
-                          elevation: state.gender != Gender.female ? 10 : 2,
+                          color: state.person.gender != Gender.female ? Colors.white : Styles.userCardColor,
+                          elevation: state.person.gender != Gender.female ? 10 : 2,
                           name: 'Woman',
                           image: const AssetImage('assets/woman.png'),
-                          styles: state.gender != Gender.female ? Styles.textStyleCard : Styles.textStyleCardTap,
+                          styles: state.person.gender != Gender.female ? Styles.textStyleCard : Styles.textStyleCardTap,
                         );
                       },
                     ),
@@ -61,10 +61,10 @@ class HomePage extends StatelessWidget {
                     child: BlocBuilder<BmiCubit, BmiState>(
                       builder: (context, state) {
                         return UserCard(
-                          styles: state.gender != Gender.male ? Styles.textStyleCard : Styles.textStyleCardTap,
+                          styles: state.person.gender != Gender.male ? Styles.textStyleCard : Styles.textStyleCardTap,
                           onTap: () => BlocProvider.of<BmiCubit>(context).setGender(Gender.male),
-                          color: state.gender != Gender.male ? Colors.white : Styles.userCardColor,
-                          elevation: state.gender != Gender.male ? 10 : 2,
+                          color: state.person.gender != Gender.male ? Colors.white : Styles.userCardColor,
+                          elevation: state.person.gender != Gender.male ? 10 : 2,
                           name: 'Man',
                           image: const AssetImage('assets/man.png'),
                         );
@@ -75,9 +75,9 @@ class HomePage extends StatelessWidget {
                     child: BlocBuilder<BmiCubit, BmiState>(
                       builder: (context, state) {
                         return UserCard(
-                          styles: state.gender != Gender.other ? Styles.textStyleCard : Styles.textStyleCardTap,
-                          color: state.gender != Gender.other ? Colors.white : Styles.userCardColor,
-                          elevation: state.gender != Gender.other ? 10 : 2,
+                          styles: state.person.gender != Gender.other ? Styles.textStyleCard : Styles.textStyleCardTap,
+                          color: state.person.gender != Gender.other ? Colors.white : Styles.userCardColor,
+                          elevation: state.person.gender != Gender.other ? 10 : 2,
                           onTap: () => BlocProvider.of<BmiCubit>(context).setGender(Gender.other),
                           name: 'Other',
                           image: const AssetImage('assets/gender.png'),
