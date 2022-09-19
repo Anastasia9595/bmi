@@ -1,18 +1,16 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'package:bmi_calculator/helpers/app_styles.dart';
+import 'package:bmi_calculator/cubit/bmi_cubit.dart';
+import 'package:bmi_calculator/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'helperWidgets/triangleClipper.dart';
 
 class WeightCard extends StatelessWidget {
-  WeightCard({super.key, required this.name, required this.child, required this.weight});
-
-  final String name;
-  final Widget child;
-
-  final weight;
-  int selectedWeightIndex = 0;
+  const WeightCard({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,18 +24,22 @@ class WeightCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(children: [
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              text: name,
-              style: TextStyle(fontSize: 20, color: Styles.textColor),
-              children: [
-                TextSpan(
-                  text: '\n$weight',
-                  style: const TextStyle(fontSize: 16),
+          BlocBuilder<BmiCubit, BmiState>(
+            builder: (context, state) {
+              return RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: 'Weight',
+                  style: TextStyle(fontSize: 20, color: Styles.textColor),
+                  children: [
+                    TextSpan(
+                      text: '\n${state.weight}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
           const SizedBox(
             height: 10,
@@ -57,7 +59,33 @@ class WeightCard extends StatelessWidget {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.05,
                         width: MediaQuery.of(context).size.width * 0.30,
-                        child: child,
+                        child: BlocBuilder<BmiCubit, BmiState>(
+                          builder: (context, state) {
+                            return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 100,
+                              itemBuilder: ((context, index) {
+                                final weight = 40 + index;
+                                return Center(
+                                  child: InkWell(
+                                    onTap: () {
+                                      BlocProvider.of<BmiCubit>(context).setSelectWeight(weight, index);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        weight.toString(),
+                                        style: state.selectedWeightIndex == index
+                                            ? Styles.kTexStyleBold
+                                            : Styles.kTexStyle,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),

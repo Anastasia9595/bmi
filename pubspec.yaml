@@ -12,8 +12,10 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.1
   get: ^4.6.5
   scroll_snap_list: ^0.9.1
   scrollable_positioned_list: ^0.3.4

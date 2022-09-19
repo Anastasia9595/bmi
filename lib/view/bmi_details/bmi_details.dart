@@ -1,18 +1,21 @@
+import 'package:bmi_calculator/cubit/bmi_cubit.dart';
+import 'package:bmi_calculator/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 class BMIDetail extends StatelessWidget {
-  BMIDetail({Key? key, required this.bmi}) : super(key: key);
-
-  final String bmi;
+  const BMIDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<BmiCubit>().state;
+
     return Container(
       height: double.maxFinite * 0.5,
-      decoration: const BoxDecoration(
-        color: Color(0xFFEB1555),
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        color: Styles.kBottomContainerColour,
+        borderRadius: const BorderRadius.only(
           topRight: Radius.circular(40),
           topLeft: Radius.circular(40),
         ),
@@ -23,14 +26,24 @@ class BMIDetail extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                const Text(
-                  'Your Bmi is',
-                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 24),
-                ),
-                const SizedBox(height: 25),
                 Text(
-                  '$bmi kg/m2',
-                  style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 20),
+                  'Your Bmi is',
+                  style: Styles.kTextStyleWhiteboldTitle,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  '${state.bmiResult.toStringAsFixed(2)} kg/m2',
+                  style: Styles.kTextStyleWhiteboldsubtitle,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  state.bmiResultText,
+                  style: Styles.kTextStyleWhiteResult,
+                ),
+                const SizedBox(height: 30),
+                Text(
+                  state.description,
+                  style: Styles.kTextStyleWhite,
                 ),
                 const SizedBox(height: 25),
                 InkWell(

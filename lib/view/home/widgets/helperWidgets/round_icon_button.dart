@@ -10,7 +10,6 @@ class RoundIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       elevation: 0.0,
-      child: Icon(icon),
       onPressed: () => onPressed(),
       constraints: const BoxConstraints.tightFor(
         width: 40,
@@ -18,6 +17,7 @@ class RoundIconButton extends StatelessWidget {
       ),
       shape: const CircleBorder(),
       fillColor: Colors.grey.shade300,
+      child: Icon(icon),
     );
   }
 }
