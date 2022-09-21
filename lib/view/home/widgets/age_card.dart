@@ -47,12 +47,12 @@ class AgeCard extends StatelessWidget {
                 RoundIconButton(
                     icon: Icons.add,
                     onPressed: () {
-                      BlocProvider.of<BmiCubit>(context).incrementAge();
+                      context.read<BmiCubit>().incrementAge();
                     }),
                 RoundIconButton(
                     icon: Icons.remove,
                     onPressed: () {
-                      BlocProvider.of<BmiCubit>(context).decrementAge();
+                      context.read<BmiCubit>().decrementAge();
                     }),
               ],
             )

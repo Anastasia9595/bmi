@@ -1,5 +1,7 @@
 import 'package:bmi_calculator/cubit/bmi_cubit.dart';
 import 'package:bmi_calculator/utils/constants.dart';
+import 'package:bmi_calculator/view/home/widgets/helperWidgets/hero_dialog_route.dart';
+import 'package:bmi_calculator/view/home/widgets/helperWidgets/popup_card_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -52,6 +54,7 @@ class BMIDetail extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         context.read<BmiCubit>().clearInfo();
+                        state.controller.jumpTo(0);
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -74,7 +77,19 @@ class BMIDetail extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 15),
-                    const Icon(Icons.bookmark_add, color: Colors.white, size: 26),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          HeroDialogRoute(builder: (context) {
+                            return const popupCard();
+                          }),
+                        );
+                      },
+                      child: const Hero(
+                        tag: 'hero-tag',
+                        child: Icon(Icons.bookmark_add, color: Colors.white, size: 26),
+                      ),
+                    ),
                   ],
                 )
               ],

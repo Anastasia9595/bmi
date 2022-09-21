@@ -6,6 +6,7 @@ enum Gender { male, female, other, none }
 
 class Styles {
   static Color primaryColor = primary;
+  static const Color accentColor = Color(0xFFef8354);
   static Color textColorHeadline = const Color(0xFF707070);
   static Color textColor = const Color(0xFF4B4949);
   static Color userCardColor = const Color(0xFFFF9494).withOpacity(0.5);

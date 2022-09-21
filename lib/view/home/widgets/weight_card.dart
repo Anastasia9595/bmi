@@ -14,7 +14,9 @@ class WeightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _scrollController = ScrollController();
+    final state = context.watch<BmiCubit>().state;
+    ScrollController _scrollController = ScrollController();
+
     return Card(
       elevation: 10,
       shape: const RoundedRectangleBorder(
@@ -63,7 +65,7 @@ class WeightCard extends StatelessWidget {
                         child: BlocBuilder<BmiCubit, BmiState>(
                           builder: (context, state) {
                             return ListView.builder(
-                              controller: _scrollController,
+                              controller: state.controller,
                               scrollDirection: Axis.horizontal,
                               itemCount: 100,
                               itemBuilder: ((context, index) {
@@ -71,7 +73,7 @@ class WeightCard extends StatelessWidget {
                                 return Center(
                                   child: InkWell(
                                     onTap: () {
-                                      BlocProvider.of<BmiCubit>(context).setSelectWeight(weight, index);
+                                      context.read<BmiCubit>().setSelectWeight(weight, index);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),

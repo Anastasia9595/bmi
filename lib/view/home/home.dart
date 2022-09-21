@@ -3,6 +3,9 @@ import 'package:bmi_calculator/view/bmi_details/bmi_details.dart';
 import 'package:bmi_calculator/view/home/widgets/age_card.dart';
 import 'package:bmi_calculator/view/home/widgets/height_card.dart';
 import 'package:bmi_calculator/view/home/widgets/helperWidgets/bottom_button.dart';
+import 'package:bmi_calculator/view/home/widgets/helperWidgets/hero_dialog_route.dart';
+import 'package:bmi_calculator/view/home/widgets/helperWidgets/popup_card_user.dart';
+
 import 'package:bmi_calculator/view/home/widgets/user_card.dart';
 import 'package:bmi_calculator/view/home/widgets/weight_card.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +50,7 @@ class HomePage extends StatelessWidget {
                     child: BlocBuilder<BmiCubit, BmiState>(
                       builder: (context, state) {
                         return UserCard(
-                          onTap: () => BlocProvider.of<BmiCubit>(context).setGender(Gender.female),
+                          onTap: () => context.read<BmiCubit>().setGender(Gender.female),
                           color: state.person.gender != Gender.female ? Colors.white : Styles.userCardColor,
                           elevation: state.person.gender != Gender.female ? 10 : 2,
                           name: 'Woman',
@@ -62,7 +65,7 @@ class HomePage extends StatelessWidget {
                       builder: (context, state) {
                         return UserCard(
                           styles: state.person.gender != Gender.male ? Styles.textStyleCard : Styles.textStyleCardTap,
-                          onTap: () => BlocProvider.of<BmiCubit>(context).setGender(Gender.male),
+                          onTap: () => context.read<BmiCubit>().setGender(Gender.male),
                           color: state.person.gender != Gender.male ? Colors.white : Styles.userCardColor,
                           elevation: state.person.gender != Gender.male ? 10 : 2,
                           name: 'Man',
@@ -78,7 +81,7 @@ class HomePage extends StatelessWidget {
                           styles: state.person.gender != Gender.other ? Styles.textStyleCard : Styles.textStyleCardTap,
                           color: state.person.gender != Gender.other ? Colors.white : Styles.userCardColor,
                           elevation: state.person.gender != Gender.other ? 10 : 2,
-                          onTap: () => BlocProvider.of<BmiCubit>(context).setGender(Gender.other),
+                          onTap: () => context.read<BmiCubit>().setGender(Gender.other),
                           name: 'Other',
                           image: const AssetImage('assets/gender.png'),
                         );
@@ -107,18 +110,30 @@ class HomePage extends StatelessWidget {
                 builder: (context, state) {
                   return BottomButton(
                     onTap: () {
-                      BlocProvider.of<BmiCubit>(context).setBmiResult();
-
-                      BlocProvider.of<BmiCubit>(context).setBmiCategory();
-                      showModalBottomSheet(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
+                      context.read<BmiCubit>().setBmiResult();
+                      context.read<BmiCubit>().setBmiCategory();
+                      final snackbar = SnackBar(
+                        content: const Text(
+                          'Please select a gender',
+                          style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        context: context,
-                        builder: (ctx) {
-                          return const BMIDetail();
-                        },
+                        backgroundColor: Styles.kBottomContainerColour,
+                        shape: const StadiumBorder(),
+                        behavior: SnackBarBehavior.floating,
                       );
+                      if (state.person.gender == Gender.none) {
+                        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                      } else {
+                        showModalBottomSheet(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          context: context,
+                          builder: (ctx) {
+                            return const BMIDetail();
+                          },
+                        );
+                      }
                     },
                   );
                 },

@@ -67,10 +67,7 @@ class HeightCard extends StatelessWidget {
                     minorTicksPerInterval: 5,
                     value: state.person.height,
                     onChanged: (value) {
-                      BlocProvider.of<BmiCubit>(context).setSelectedHeight(value);
-                      // setState(() {
-                      //   height = value;
-                      // });
+                      context.read<BmiCubit>().setSelectedHeight(value);
                     },
                   ),
                 );

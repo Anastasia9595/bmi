@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider<BmiCubit>(
       create: (context) => BmiCubit(),
       child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: HomePage(),
       ),
     );

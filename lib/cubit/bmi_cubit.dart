@@ -10,11 +10,13 @@ part 'bmi_state.dart';
 
 class BmiCubit extends Cubit<BmiState> {
   BmiCubit()
-      : super(const BmiState(
+      : super(BmiState(
           selectedWeightIndex: 0,
           bmiResultText: '',
           description: '',
-          person: Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: ''),
+          person: const Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: ''),
+          isClosed: false,
+          controller: ScrollController(),
         ));
 
   void incrementAge() {
@@ -88,9 +90,15 @@ class BmiCubit extends Cubit<BmiState> {
 
   void clearInfo() {
     emit(state.copyWith(
-        selectedWeightIndex: 0,
-        bmiResultText: '',
-        description: '',
-        person: const Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: '')));
+      isClosed: false,
+      selectedWeightIndex: 0,
+      bmiResultText: '',
+      description: '',
+      person: const Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: ''),
+    ));
+  }
+
+  void setClosedToTrue() {
+    emit(state.copyWith(isClosed: true));
   }
 }
