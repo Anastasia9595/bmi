@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:bmi_calculator/utils/constants.dart';
 
 class Person extends Equatable {
+  final int id;
   final String name;
   final double height;
   final int weight;
@@ -12,6 +13,7 @@ class Person extends Equatable {
   final double bmiResult;
 
   const Person({
+    required this.id,
     required this.name,
     required this.height,
     required this.weight,
@@ -24,6 +26,7 @@ class Person extends Equatable {
   List<Object> get props => [height, weight, age, gender, bmiResult, name];
 
   Person copyWith({
+    int? id,
     String? name,
     double? height,
     int? weight,
@@ -32,6 +35,7 @@ class Person extends Equatable {
     double? bmiResult,
   }) {
     return Person(
+      id: id ?? this.id,
       name: name ?? this.name,
       height: height ?? this.height,
       weight: weight ?? this.weight,

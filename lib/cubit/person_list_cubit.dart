@@ -1,21 +1,34 @@
 import 'package:bloc/bloc.dart';
+import 'package:bmi_calculator/utils/constants.dart';
 import 'package:equatable/equatable.dart';
 
 import '../model/person.dart';
-import '../utils/constants.dart';
 
 part 'person_list_state.dart';
 
 class PersonListCubit extends Cubit<PersonListState> {
-  PersonListCubit() : super(PersonListState(personList: []));
+  PersonListCubit() : super(const PersonListState(autoId: 0, personList: []));
 
-  void addPersonToList(String name, double height, int weight, int age, Gender gender, double bmiResult) {
-    Person person = Person(name: name, height: height, weight: weight, age: age, gender: gender, bmiResult: bmiResult);
-    emit(state.copyWith(personList: [...state.personList, person]));
+  void addPersonToList(
+    Person person,
+    String name,
+  ) {
+    Person newPerson = Person(
+        id: state.autoId + 1,
+        name: name,
+        height: person.height,
+        weight: person.weight,
+        age: person.weight,
+        gender: person.gender,
+        bmiResult: person.bmiResult);
+
+    emit(state.copyWith(
+      autoId: state.autoId + 1,
+      personList: [...state.personList, newPerson],
+    ));
   }
 
-  // name muss durch eine id getauscht werden
-  void removePersonfromList() {
-    emit(state.copyWith(personList: state.personList.where((element) => element.name != element.name).toList()));
+  void removePersonfromList(int id) {
+    emit(state.copyWith(personList: state.personList.where((element) => element.id != id).toList()));
   }
 }

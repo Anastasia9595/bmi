@@ -14,7 +14,7 @@ class BmiCubit extends Cubit<BmiState> {
           selectedWeightIndex: 0,
           bmiResultText: '',
           description: '',
-          person: const Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: ''),
+          person: const Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: '', id: 0),
           isClosed: false,
           controller: ScrollController(),
         ));
@@ -94,7 +94,8 @@ class BmiCubit extends Cubit<BmiState> {
       selectedWeightIndex: 0,
       bmiResultText: '',
       description: '',
-      person: const Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: ''),
+      person:
+          Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: '', id: state.person.id),
     ));
   }
 

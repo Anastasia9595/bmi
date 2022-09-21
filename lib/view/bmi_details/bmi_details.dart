@@ -81,7 +81,7 @@ class BMIDetail extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(
                           HeroDialogRoute(builder: (context) {
-                            return const popupCard();
+                            return const PopupCard();
                           }),
                         );
                       },

@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/cubit/bmi_cubit.dart';
+import 'package:bmi_calculator/cubit/person_list_cubit.dart';
 import 'package:bmi_calculator/view/home/home.dart';
 
 import 'package:flutter/material.dart';
@@ -11,11 +12,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<BmiCubit>(
-      create: (context) => BmiCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BmiCubit>(
+          create: ((context) => BmiCubit()),
+        ),
+        BlocProvider<PersonListCubit>(
+          create: (context) => PersonListCubit(),
+        )
+      ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: HomePage(),
