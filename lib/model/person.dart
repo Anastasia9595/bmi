@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
 import 'package:bmi_calculator/utils/constants.dart';
@@ -23,7 +22,7 @@ class Person extends Equatable {
   });
 
   @override
-  List<Object> get props => [height, weight, age, gender, bmiResult, name];
+  List<Object> get props => [height, weight, age, gender, bmiResult, name, gender];
 
   Person copyWith({
     int? id,
@@ -42,6 +41,31 @@ class Person extends Equatable {
       age: age ?? this.age,
       gender: gender ?? this.gender,
       bmiResult: bmiResult ?? this.bmiResult,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'height': height,
+      'weight': weight,
+      'age': age,
+      'gender': gender.index,
+      'bmiResult': bmiResult,
+    };
+  }
+
+  factory Person.fromMap(Map<String, dynamic> map) {
+    int val = map['gender'];
+    return Person(
+      id: map['id'] as int,
+      name: map['name'] as String,
+      height: map['height'] as double,
+      weight: map['weight'] as int,
+      age: map['age'] as int,
+      gender: Gender.values[val],
+      bmiResult: map['bmiResult'] as double,
     );
   }
 }

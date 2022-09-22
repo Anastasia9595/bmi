@@ -18,4 +18,18 @@ class PersonListState extends Equatable {
       personList: personList ?? this.personList,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'autoId': autoId,
+      'personList': personList.map((x) => x.toMap()).toList(),
+    };
+  }
+
+  factory PersonListState.fromMap(Map<String, dynamic> map) {
+    return PersonListState(
+      autoId: map['autoId'] as int,
+      personList: List<Person>.from(map['personList'].map((x) => Person.fromMap(x))),
+    );
+  }
 }

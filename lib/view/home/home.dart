@@ -8,6 +8,7 @@ import 'package:bmi_calculator/view/home/widgets/helperWidgets/popup_card_user.d
 
 import 'package:bmi_calculator/view/home/widgets/user_card.dart';
 import 'package:bmi_calculator/view/home/widgets/weight_card.dart';
+import 'package:bmi_calculator/view/personlist/persons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,6 +25,21 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PersonListPage(),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.list,
+                  color: Colors.grey,
+                ))
+          ],
           title: RichText(
             textAlign: TextAlign.start,
             text: TextSpan(
@@ -113,6 +129,7 @@ class HomePage extends StatelessWidget {
                       context.read<BmiCubit>().setBmiResult();
                       context.read<BmiCubit>().setBmiCategory();
                       final snackbar = SnackBar(
+                        elevation: 12,
                         content: const Text(
                           'Please select a gender',
                           style: TextStyle(fontWeight: FontWeight.bold),

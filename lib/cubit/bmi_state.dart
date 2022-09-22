@@ -37,4 +37,25 @@ class BmiState extends Equatable {
       controller: controller ?? this.controller,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'person': person.toMap(),
+      'selectedWeightIndex': selectedWeightIndex,
+      'bmiResultText': bmiResultText,
+      'description': description,
+      'isClosed': isClosed,
+      'controller': controller,
+    };
+  }
+
+  factory BmiState.fromMap(Map<String, dynamic> map) {
+    return BmiState(
+        person: Person.fromMap(map['person'] as Map<String, dynamic>),
+        selectedWeightIndex: map['selectedWeightIndex'] as int,
+        bmiResultText: map['bmiResultText'] as String,
+        description: map['description'] as String,
+        isClosed: map['isClosed'] as bool,
+        controller: map['controller'] as ScrollController);
+  }
 }

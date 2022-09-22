@@ -14,6 +14,16 @@ class PersonListPage extends StatelessWidget {
     final statebmi = context.watch<BmiCubit>().state;
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: (() {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ),
+              );
+            }),
+            icon: Icon(Icons.arrow_back)),
         title: const Text('Person List'),
       ),
       body: SafeArea(

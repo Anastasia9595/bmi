@@ -5,10 +5,11 @@ import 'package:bmi_calculator/model/person.dart';
 import 'package:bmi_calculator/utils/constants.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'bmi_state.dart';
 
-class BmiCubit extends Cubit<BmiState> {
+class BmiCubit extends Cubit<BmiState> with HydratedMixin {
   BmiCubit()
       : super(BmiState(
           selectedWeightIndex: 0,
@@ -17,7 +18,9 @@ class BmiCubit extends Cubit<BmiState> {
           person: const Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: '', id: 0),
           isClosed: false,
           controller: ScrollController(),
-        ));
+        )) {
+    hydrate();
+  }
 
   void incrementAge() {
     final person = state.person;
@@ -101,5 +104,15 @@ class BmiCubit extends Cubit<BmiState> {
 
   void setClosedToTrue() {
     emit(state.copyWith(isClosed: true));
+  }
+
+  @override
+  BmiState? fromJson(Map<String, dynamic> json) {
+    BmiState.fromMap(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(BmiState state) {
+    state.toMap();
   }
 }
