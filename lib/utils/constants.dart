@@ -4,8 +4,6 @@ Color primary = const Color(0xFFffe6e6);
 
 enum Gender { male, female, other, none }
 
-const List<String> gender = ['male', 'female', 'other', 'none'];
-
 class Styles {
   // static List<String> gender = ['male', 'female', 'other', 'none'];
   static Color primaryColor = primary;

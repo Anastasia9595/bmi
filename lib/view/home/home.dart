@@ -23,6 +23,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Styles.primaryColor,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation: 0,
           actions: [
@@ -121,6 +122,9 @@ class HomePage extends StatelessWidget {
                     child: AgeCard(),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 20,
               ),
               BlocBuilder<BmiCubit, BmiState>(
                 builder: (context, state) {

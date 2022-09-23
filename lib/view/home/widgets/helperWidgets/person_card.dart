@@ -6,15 +6,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../utils/constants.dart';
 
 class PersonCard extends StatelessWidget {
-  const PersonCard({super.key, required this.name, required this.bmiResult, required this.id});
+  const PersonCard({super.key, required this.name, required this.bmi, required this.id, required this.bmiResult});
 
   final String name;
-  final double bmiResult;
+  final double bmi;
   final int id;
+  final String bmiResult;
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       color: Colors.pinkAccent.shade100,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -25,7 +27,7 @@ class PersonCard extends StatelessWidget {
               style: Styles.kTextStyleWhiteboldTitle,
             ),
             subtitle: Text(
-              'Your Bmi is: ${bmiResult.toStringAsFixed(2)}',
+              'Your Bmi is: ${bmi.toStringAsFixed(2)} \n It is: $bmiResult',
               style: Styles.kTextStyleWhiteboldsubtitle,
             ),
           ),

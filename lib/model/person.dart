@@ -9,7 +9,8 @@ class Person extends Equatable {
   final int weight;
   final int age;
   final Gender gender;
-  final double bmiResult;
+  final double bmi;
+  final String bmiResult;
 
   const Person({
     required this.id,
@@ -18,11 +19,12 @@ class Person extends Equatable {
     required this.weight,
     required this.age,
     required this.gender,
+    required this.bmi,
     required this.bmiResult,
   });
 
   @override
-  List<Object> get props => [height, weight, age, gender, bmiResult, name, gender];
+  List<Object> get props => [height, weight, age, gender, bmi, name, gender];
 
   Person copyWith({
     int? id,
@@ -31,7 +33,8 @@ class Person extends Equatable {
     int? weight,
     int? age,
     Gender? gender,
-    double? bmiResult,
+    double? bmi,
+    String? bmiResult,
   }) {
     return Person(
       id: id ?? this.id,
@@ -40,6 +43,7 @@ class Person extends Equatable {
       weight: weight ?? this.weight,
       age: age ?? this.age,
       gender: gender ?? this.gender,
+      bmi: bmi ?? this.bmi,
       bmiResult: bmiResult ?? this.bmiResult,
     );
   }
@@ -52,6 +56,7 @@ class Person extends Equatable {
       'weight': weight,
       'age': age,
       'gender': gender.index,
+      'bmi': bmi,
       'bmiResult': bmiResult,
     };
   }
@@ -65,7 +70,8 @@ class Person extends Equatable {
       weight: map['weight'] as int,
       age: map['age'] as int,
       gender: Gender.values[val],
-      bmiResult: map['bmiResult'] as double,
+      bmi: map['bmi'] as double,
+      bmiResult: map['bmiResult'] as String,
     );
   }
 }

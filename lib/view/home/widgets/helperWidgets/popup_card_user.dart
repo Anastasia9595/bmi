@@ -32,7 +32,8 @@ class PopupCard extends StatelessWidget {
                     TextField(
                       controller: myController,
                       decoration: const InputDecoration(
-                        hintText: 'Name',
+                        labelText: 'Enter your Name',
+                        labelStyle: TextStyle(color: Colors.black),
                         border: InputBorder.none,
                       ),
                       cursorColor: Colors.white,
@@ -55,15 +56,17 @@ class PopupCard extends StatelessWidget {
                               builder: (context, personliststate) {
                                 return TextButton(
                                   onPressed: () {
-                                    BlocProvider.of<PersonListCubit>(context)
-                                        .addPersonToList(bmistate.person, myController.text);
+                                    if (myController.text.isNotEmpty) {
+                                      BlocProvider.of<PersonListCubit>(context)
+                                          .addPersonToList(bmistate.person, myController.text);
 
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: ((context) => const PersonListPage()),
-                                      ),
-                                    );
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: ((context) => const PersonListPage()),
+                                        ),
+                                      );
+                                    }
                                   },
                                   child: const Text(
                                     'Add',

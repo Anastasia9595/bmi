@@ -34,12 +34,12 @@ class BMIDetail extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  '${state.person.bmiResult.toStringAsFixed(2)} kg/m2',
+                  '${state.person.bmi.toStringAsFixed(2)} kg/m2',
                   style: Styles.kTextStyleWhiteboldsubtitle,
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  state.bmiResultText,
+                  state.person.bmiResult,
                   style: Styles.kTextStyleWhiteResult,
                 ),
                 const SizedBox(height: 30),

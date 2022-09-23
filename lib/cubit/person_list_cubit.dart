@@ -20,17 +20,19 @@ class PersonListCubit extends Cubit<PersonListState> with HydratedMixin {
     String name,
   ) {
     Person newPerson = Person(
-        id: state.autoId + 1,
-        name: name,
-        height: person.height,
-        weight: person.weight,
-        age: person.weight,
-        gender: person.gender,
-        bmiResult: person.bmiResult);
+      id: state.autoId + 1,
+      name: name,
+      height: person.height,
+      weight: person.weight,
+      age: person.weight,
+      gender: person.gender,
+      bmi: person.bmi,
+      bmiResult: person.bmiResult,
+    );
 
     emit(state.copyWith(
       autoId: state.autoId + 1,
-      personList: [...state.personList, newPerson],
+      personList: [newPerson, ...state.personList],
     ));
   }
 

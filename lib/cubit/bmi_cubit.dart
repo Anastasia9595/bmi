@@ -13,9 +13,10 @@ class BmiCubit extends Cubit<BmiState> with HydratedMixin {
   BmiCubit()
       : super(BmiState(
           selectedWeightIndex: 0,
-          bmiResultText: '',
+          // bmiResultText: '',
           description: '',
-          person: const Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: '', id: 0),
+          person: const Person(
+              height: 160, weight: 40, age: 21, gender: Gender.none, bmi: 0, name: '', id: 0, bmiResult: ''),
           isClosed: false,
           controller: ScrollController(),
         )) {
@@ -51,7 +52,7 @@ class BmiCubit extends Cubit<BmiState> with HydratedMixin {
   double setBmiResult() {
     final bmiResult = state.person.weight / pow(state.person.height / 100, 2);
     final person = state.person;
-    final newPerson = person.copyWith(bmiResult: bmiResult);
+    final newPerson = person.copyWith(bmi: bmiResult);
     emit(
       state.copyWith(
         person: newPerson,
@@ -70,6 +71,7 @@ class BmiCubit extends Cubit<BmiState> with HydratedMixin {
     final result = setBmiResult();
     final String description;
     final String bmiResultText;
+    final state = this.state;
     if (result < 18.5) {
       bmiResultText = 'Underweight';
       description = "You're in the underweight range. "
@@ -88,17 +90,18 @@ class BmiCubit extends Cubit<BmiState> with HydratedMixin {
           "A BMI above 30 indicates that a person is morbidly obese and therefore a candidate for bariatric surgery. Bariatric surgery may also be an option for people with a BMI between 35 and 40 who suffer from life-threatening cardiopulmonary problems, diabetes, or other medical problems listed below.";
     }
 
-    emit(state.copyWith(bmiResultText: bmiResultText, description: description));
+    final newperson = state.person.copyWith(bmiResult: bmiResultText);
+
+    emit(state.copyWith(person: newperson, description: description));
   }
 
   void clearInfo() {
     emit(state.copyWith(
       isClosed: false,
       selectedWeightIndex: 0,
-      bmiResultText: '',
       description: '',
-      person:
-          Person(height: 160, weight: 40, age: 21, gender: Gender.none, bmiResult: 0, name: '', id: state.person.id),
+      person: Person(
+          height: 160, weight: 40, age: 21, gender: Gender.none, bmi: 0, name: '', id: state.person.id, bmiResult: ''),
     ));
   }
 
