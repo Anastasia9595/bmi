@@ -25,7 +25,7 @@
 </li>
 <li>:package:<strong>Packages</strong>
     <ul>
-        <li>&emsp; Packed 1</li>
+        <li>&emsp; Package 1</li>
     </ul>
 </li>
 </ul>
