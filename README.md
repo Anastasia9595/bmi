@@ -12,7 +12,13 @@
 
 <!-- TechStack -->
 ### :space_invader: Tech Stack
-
+<details>
+ 
+  <ul>
+    <li><a href="https://www.typescriptlang.org/">Flutter</a></li>
+    <li><a href="https://nextjs.org/">Dart</a></li>
+  </ul>
+</details>
 
 ## Getting Started
 
