@@ -13,7 +13,9 @@
 <!-- TechStack -->
 ### :space_invader: Tech Stack
 <ul>
-<li>:hammer_and_wrench:<strong>Framework</strong><a href="https://flutter.dev">Flutter</a></li>
+<li>:hammer_and_wrench:<strong>Framework</strong>
+    <a href="https://flutter.dev">Flutter</a>
+</li>
 <li>:books:<strong> Language</strong><a href="https://dart.dev">Dart</a></li>
 <li>:package:<strong>Packeges</strong></li>
 </ul>
