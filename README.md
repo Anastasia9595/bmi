@@ -12,11 +12,11 @@
 
 <!-- TechStack -->
 ### :space_invader: Tech Stack
-<p> :hammer_and_wrench: <strong> Framework </strong></p>
-<a href="https://flutter.dev">Flutter</a>
-<p> :books: <strong> Language</strong></p>
-<a href="https://dart.dev">Dart</a>
-<p> :package: <strong> Packeges</strong></p>
+<p>:hammer_and_wrench:<strong>Framework</strong></p>
+<a href="https://flutter.dev" style="text-decoration:none">Flutter</a>
+<p>:books:<strong> Language</strong></p>
+<a href="https://dart.dev" style="text-decoration:none">Dart</a>
+<p>:package:<strong>Packeges</strong></p>
 
 
 ## Getting Started
