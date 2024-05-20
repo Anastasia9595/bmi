@@ -16,7 +16,7 @@
 <li>:hammer_and_wrench:<strong>Framework</strong>
     <a href="https://flutter.dev">Flutter</a>
     <ul>
-        <li>&emsp;<!-- Hier kannst du den Text für das Unterelement hinzufügen --></li>
+        <li>&emsp; <a href="https://flutter.dev">Flutter</a></li>
     </ul>
 </li>
 <li>:books:<strong> Language</strong><a href="https://dart.dev">Dart</a></li>
