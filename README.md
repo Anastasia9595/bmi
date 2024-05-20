@@ -1,6 +1,18 @@
 # bmi_calculator
 
-A new Flutter project.
+<!-- About the Project -->
+## :star2: About the Project
+
+<!-- Screenshots -->
+### :camera: Screenshots
+
+<div align="center"> 
+  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+</div>
+
+<!-- TechStack -->
+### :space_invader: Tech Stack
+
 
 ## Getting Started
 
