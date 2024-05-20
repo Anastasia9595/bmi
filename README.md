@@ -14,7 +14,6 @@
 ### :space_invader: Tech Stack
 <ul>
 <li>:hammer_and_wrench:<strong>Framework</strong>
-    <a href="https://flutter.dev">Flutter</a>
     <ul>
         <li>&emsp; <a href="https://flutter.dev">Flutter</a></li>
     </ul>
